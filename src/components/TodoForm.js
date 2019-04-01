@@ -21,8 +21,8 @@ export class TodoForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const { addTodo } = this.props;
-    addTodo(this.state);
+    const { onAddTodo } = this.props;
+    onAddTodo(this.state);
     this.setState({
       title: '',
       description: ''
@@ -35,17 +35,18 @@ export class TodoForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <Field
           id="title"
-          title="Enter the todo"
+          title="Title"
           type="text"
-          placeholder="Title"
+          placeholder="Enter the todo"
           value={this.state.title}
           onChange={this.handleChange}
         />
         <Field
           id="description"
-          description="Enter a description for the todo"
+          title="Description"
+          description="Description"
           type="textarea"
-          placeholder="Description"
+          placeholder="Enter a description for the todo"
           value={this.state.description}
           onChange={this.handleChange}
           rows="5"

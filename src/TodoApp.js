@@ -11,9 +11,9 @@ class TodoApp extends Component {
       todos: []
     };
 
-    this.addTodo = this.addTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
-    this.completeTodo = this.completeTodo.bind(this);
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleRemoveTodo = this.handleRemoveTodo.bind(this);
+    this.handleCompleteTodo = this.handleCompleteTodo.bind(this);
   }
 
   async componentDidMount() {
@@ -26,7 +26,7 @@ class TodoApp extends Component {
     }
   }
 
-  async addTodo(todo) {
+  async handleAddTodo(todo) {
     const { data } = await addTodo({
       ...todo,
       createdAt: new Date(),
@@ -36,7 +36,7 @@ class TodoApp extends Component {
     this.setState({ todos: [data, ...this.state.todos] });
   }
 
-  async removeTodo(id) {
+  async handleRemoveTodo(id) {
     await removeTodo(id);
 
     this.setState({
@@ -44,7 +44,7 @@ class TodoApp extends Component {
     });
   }
 
-  async completeTodo(id) {
+  async handleCompleteTodo(id) {
     const updatedTodo = this.state.todos.find(todo => todo.id === id);
     updatedTodo.completed = true;
 
@@ -65,15 +65,15 @@ class TodoApp extends Component {
       <div className="container mt-5">
         <h1 className="display-5">Awesome TODOS!!</h1>
         <hr />
-        <TodoForm addTodo={this.addTodo} />
+        <TodoForm onAddTodo={this.handleAddTodo} />
         <div className="row mt-5">
           <div className="col">
             <h3>My Task List</h3>
             <hr />
             <List
               items={this.state.todos.filter(todo => !todo.completed)}
-              complete={this.completeTodo}
-              remove={this.removeTodo}
+              onComplete={this.handleCompleteTodo}
+              onRemove={this.handleRemoveTodo}
             />
           </div>
           <div className="col">
@@ -81,8 +81,8 @@ class TodoApp extends Component {
             <hr />
             <List
               items={this.state.todos.filter(todo => todo.completed)}
-              complete={this.completeTodo}
-              remove={this.removeTodo}
+              onComplete={this.handleCompleteTodo}
+              onRemove={this.handleRemoveTodo}
             />
           </div>
         </div>

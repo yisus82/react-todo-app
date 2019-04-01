@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ListItem({ item, handleComplete, handleRemove }) {
+export function ListItem({ item, onComplete, onRemove }) {
   return (
     <div className="card mt-3 bg-light">
       <div className="card-header">{item.title}</div>
@@ -15,7 +15,7 @@ export function ListItem({ item, handleComplete, handleRemove }) {
           <a
             href="/"
             onClick={e => {
-              handleComplete(item.id);
+              onComplete(item.id);
               e.preventDefault();
             }}
             className="btn btn-outline-success mr-3"
@@ -26,7 +26,7 @@ export function ListItem({ item, handleComplete, handleRemove }) {
         <a
           href="/"
           onClick={e => {
-            handleRemove(item.id);
+            onRemove(item.id);
             e.preventDefault();
           }}
           className="btn btn-outline-danger"

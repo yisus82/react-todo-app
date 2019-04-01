@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem } from './ListItem';
 
-export function List({ items, complete, remove }) {
+export function List({ items, onComplete, onRemove }) {
   if (!items) {
     return null;
   }
@@ -10,8 +10,8 @@ export function List({ items, complete, remove }) {
     <ListItem
       key={item.id}
       item={item}
-      handleComplete={complete}
-      handleRemove={remove}
+      onComplete={onComplete}
+      onRemove={onRemove}
     />
   ));
 }
