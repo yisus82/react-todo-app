@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field } from './Field';
 
 export class TodoForm extends React.Component {
   constructor(props) {
@@ -32,29 +33,23 @@ export class TodoForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label>Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            placeholder="Title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="description"
-            placeholder="Description"
-            value={this.state.description}
-            onChange={this.handleChange}
-            rows="5"
-          />
-        </div>
+        <Field
+          id="title"
+          title="Enter the todo"
+          type="text"
+          placeholder="Title"
+          value={this.state.title}
+          onChange={this.handleChange}
+        />
+        <Field
+          id="description"
+          description="Enter a description for the todo"
+          type="textarea"
+          placeholder="Description"
+          value={this.state.description}
+          onChange={this.handleChange}
+          rows="5"
+        />
         <button
           type="submit"
           className="btn btn-success btn-lg"

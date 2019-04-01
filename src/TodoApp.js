@@ -63,7 +63,7 @@ class TodoApp extends Component {
   render() {
     return (
       <div className="container mt-5">
-        <h1 class="display-5">Awesome TODOS!!</h1>
+        <h1 className="display-5">Awesome TODOS!!</h1>
         <hr />
         <TodoForm addTodo={this.addTodo} />
         <div className="row mt-5">
