@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { getTodos, addTodo, removeTodo, updateTodo } from './http/todos';
-import { Header } from './components/Header';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Home } from './components/Home';
-import { About } from './components/About';
+import { TodoForm } from './TodoForm';
+import { List } from './List';
+import { getTodos, addTodo, removeTodo, updateTodo } from '../http/todos';
 
-class TodoApp extends Component {
+export class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -64,15 +62,29 @@ class TodoApp extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Header />
-        <div className="container mt-5">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
+      <React.Fragment>
+        <TodoForm onAddTodo={this.handleAddTodo} />
+        <div className="row mt-5">
+          <div className="col">
+            <h3>My Task List</h3>
+            <hr />
+            <List
+              items={this.state.todos.filter(todo => !todo.completed)}
+              onComplete={this.handleCompleteTodo}
+              onRemove={this.handleRemoveTodo}
+            />
+          </div>
+          <div className="col">
+            <h3>Completed</h3>
+            <hr />
+            <List
+              items={this.state.todos.filter(todo => todo.completed)}
+              onComplete={this.handleCompleteTodo}
+              onRemove={this.handleRemoveTodo}
+            />
+          </div>
         </div>
-      </BrowserRouter>
+      </React.Fragment>
     );
   }
 }
-
-export default TodoApp;
